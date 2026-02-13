@@ -17,6 +17,7 @@ body{
   text-align:center;
 }
 
+/* TITULO */
 h1{
   position:absolute;
   width:100%;
@@ -25,34 +26,31 @@ h1{
   font-size:60px;
   text-shadow:0 0 15px #ff007a;
   z-index:10;
-  animation:float 2s infinite alternate;
 }
 
-@keyframes float{
-  from{transform:translateY(0);}
-  to{transform:translateY(-8px);}
-}
-
-/* 👇 TAMAÑO CORREGIDO COMO TU FOTO */
+/* 👇 CORREGIDO: sin límites invisibles */
 model-viewer{
+  position:absolute;
   width:100%;
-  height:70vh;
-  margin-top:90px;
-  display:block;
+  height:100vh;
+  top:0;
+  left:0;
 }
 
-/* corazones y flores */
-.heart{
+/* partículas */
+.heart,.flower{
   position:absolute;
-  color:#ff006a;
-  font-size:28px;
+  top:-50px;
   animation:fall linear infinite;
+  pointer-events:none;
+}
+
+.heart{
+  color:#ff006a;
 }
 
 .flower{
-  position:absolute;
-  font-size:28px;
-  animation:fall linear infinite;
+  color:#ffb6d5;
 }
 
 @keyframes fall{
@@ -61,7 +59,7 @@ model-viewer{
     opacity:1;
   }
   to{
-    transform:translateY(100vh);
+    transform:translateY(110vh);
     opacity:0.6;
   }
 }
@@ -77,10 +75,10 @@ model-viewer{
 src="avatar.glb"
 camera-controls
 auto-rotate
-auto-rotate-delay="0"
-rotation-per-second="15deg"
-camera-orbit="0deg 75deg 2.6m"
-field-of-view="35deg"
+animation-name="*"
+autoplay
+camera-orbit="0deg 80deg 3.8m"
+field-of-view="32deg"
 interaction-prompt="none"
 shadow-intensity="1"
 exposure="1">
@@ -88,27 +86,31 @@ exposure="1">
 </model-viewer>
 
 <script>
-/* corazones */
-for(let i=0;i<12;i++){
+
+/* ❤️ CORAZONES */
+for(let i=0;i<25;i++){
   let h=document.createElement("div");
   h.className="heart";
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(5+Math.random()*5)+"s";
-  h.style.fontSize=(20+Math.random()*25)+"px";
+  h.style.fontSize=(18+Math.random()*25)+"px";
+  h.style.animationDuration=(5+Math.random()*6)+"s";
+  h.style.animationDelay=(-Math.random()*10)+"s";
   document.body.appendChild(h);
 }
 
-/* flores */
-for(let i=0;i<8;i++){
+/* 🌸 FLORES */
+for(let i=0;i<20;i++){
   let f=document.createElement("div");
   f.className="flower";
   f.innerHTML="🌸";
   f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(6+Math.random()*6)+"s";
-  f.style.fontSize=(20+Math.random()*20)+"px";
+  f.style.fontSize=(16+Math.random()*22)+"px";
+  f.style.animationDuration=(6+Math.random()*7)+"s";
+  f.style.animationDelay=(-Math.random()*10)+"s";
   document.body.appendChild(f);
 }
+
 </script>
 
 </body>

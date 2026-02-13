@@ -10,45 +10,41 @@
 body{
     margin:0;
     overflow:hidden;
-    background:#e9a7c3;
+    background:#e7a7c2;
     font-family:Arial;
 }
 
-/* TEXTO */
 h1{
     position:absolute;
-    top:25px;
+    top:20px;
     width:100%;
     text-align:center;
-    font-size:70px;
+    font-size:60px;
     color:white;
-    text-shadow:0 0 18px #ff5eaa;
+    text-shadow:0 0 20px #ff4d88;
     z-index:10;
 }
 
-/* MODEL VIEWER */
+/* PERSONAJE */
 model-viewer{
     width:100vw;
     height:100vh;
-    background:transparent;
+    --poster-color: transparent;
+    z-index:5;
 }
 
 /* FLORES Y CORAZONES */
-.decor{
+.fall{
     position:absolute;
     top:-50px;
     font-size:35px;
-    animation:fall linear infinite;
+    animation:caer linear infinite;
     pointer-events:none;
 }
 
-@keyframes fall{
-    from{
-        transform:translateY(-10vh);
-    }
-    to{
-        transform:translateY(110vh);
-    }
+@keyframes caer{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
 }
 </style>
 </head>
@@ -57,51 +53,34 @@ model-viewer{
 
 <h1>Feliz San Valentín mi pequeña Britt ❤️</h1>
 
-<!-- PERSONAJE -->
 <model-viewer
-    src="avatar.glb"
-    autoplay
-    animation-name="*"
-    camera-controls
-    disable-auto-rotate
-    interaction-prompt="none"
-    camera-orbit="0deg 75deg 2.8m"
-    min-camera-orbit="auto auto 2.8m"
-    max-camera-orbit="auto auto 2.8m"
-    field-of-view="35deg"
-    exposure="1"
-    shadow-intensity="1"
+src="avatar.glb"
+camera-controls
+auto-rotate
+rotation-per-second="8deg"
+camera-orbit="0deg 78deg 4.2m"
+min-camera-orbit="auto auto 3.8m"
+max-camera-orbit="auto auto 4.5m"
+exposure="1"
+shadow-intensity="1"
+disable-zoom
 >
 </model-viewer>
 
 <script>
+// FLORES Y CORAZONES
+const simbolos=["❤️","🌸"];
 
-/* =============================
-   FLORES Y CORAZONES
-============================= */
-
-function crearDecoracion(){
-
-    const iconos = ["🌸","❤️"];
-
-    const d = document.createElement("div");
-    d.className="decor";
-
-    d.innerText = iconos[Math.floor(Math.random()*iconos.length)];
-    d.style.left = Math.random()*100 + "vw";
-
-    const duracion = 6 + Math.random()*6;
-    d.style.animationDuration = duracion + "s";
-
-    d.style.fontSize = (20 + Math.random()*25) + "px";
-
-    document.body.appendChild(d);
-
-    setTimeout(()=>d.remove(), duracion*1000);
+for(let i=0;i<45;i++){
+  let s=document.createElement("div");
+  s.className="fall";
+  s.innerText=simbolos[Math.floor(Math.random()*simbolos.length)];
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(6+Math.random()*6)+"s";
+  s.style.fontSize=(20+Math.random()*25)+"px";
+  s.style.opacity=Math.random();
+  document.body.appendChild(s);
 }
-
-setInterval(crearDecoracion,300);
-
 </script>
 
 </body>

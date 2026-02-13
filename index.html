@@ -17,30 +17,34 @@ text-align:center;
 
 h1{
 position:absolute;
-top:20px;
 width:100%;
+top:20px;
 color:white;
-font-size:40px;
+font-size:60px;
 text-shadow:0 0 15px #ff006a;
 z-index:10;
-animation:float 2s infinite alternate;
+animation:flotar 2s infinite alternate;
 }
 
-@keyframes float{
+@keyframes flotar{
 from{transform:translateY(0);}
 to{transform:translateY(-10px);}
 }
 
 .heart{
 position:absolute;
-color:#ff006a;
-font-size:25px;
-animation:fall linear infinite;
+font-size:30px;
+animation:caer linear infinite;
 }
 
-@keyframes fall{
+@keyframes caer{
 from{transform:translateY(-100px);}
 to{transform:translateY(100vh);}
+}
+
+model-viewer{
+width:100vw;
+height:100vh;
 }
 </style>
 </head>
@@ -49,22 +53,22 @@ to{transform:translateY(100vh);}
 
 <h1>Feliz San Valentín ❤️</h1>
 
-<model-viewer
-src="Video de WhatsApp del 13_02_2026 a las 01.20.02_default.glb"
-ar
-auto-rotate
+<model-viewer 
+src="avatar.glb"
 camera-controls
-style="width:100vw;height:100vh;">
+auto-rotate
+autoplay
+ar
+shadow-intensity="1">
 </model-viewer>
 
 <script>
-for(let i=0;i<40;i++){
+for(let i=0;i<25;i++){
 let heart=document.createElement("div");
 heart.className="heart";
 heart.innerHTML="💖";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(3+Math.random()*5)+"s";
-heart.style.fontSize=(15+Math.random()*30)+"px";
 document.body.appendChild(heart);
 }
 </script>

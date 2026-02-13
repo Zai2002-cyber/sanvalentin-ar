@@ -4,49 +4,52 @@
 <meta charset="UTF-8">
 <title>Feliz San Valentín</title>
 
-<script type="module"
-src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-</script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
-
 body{
-  margin:0;
-  overflow:hidden;
-  background:#e7a8c6;
-  font-family:Arial;
-  text-align:center;
+    margin:0;
+    overflow:hidden;
+    background:#e9a7c3;
+    font-family:Arial;
 }
 
+/* TEXTO */
 h1{
-  position:absolute;
-  top:20px;
-  width:100%;
-  color:white;
-  font-size:60px;
-  text-shadow:0 0 15px #ff4d88;
-  z-index:10;
+    position:absolute;
+    top:25px;
+    width:100%;
+    text-align:center;
+    font-size:70px;
+    color:white;
+    text-shadow:0 0 18px #ff5eaa;
+    z-index:10;
 }
 
+/* MODEL VIEWER */
 model-viewer{
-  width:100vw;
-  height:100vh;
-  background:transparent;
+    width:100vw;
+    height:100vh;
+    background:transparent;
 }
 
-/* corazones y flores */
-.fall{
-  position:absolute;
-  top:-50px;
-  animation: caer linear infinite;
-  font-size:28px;
+/* FLORES Y CORAZONES */
+.decor{
+    position:absolute;
+    top:-50px;
+    font-size:35px;
+    animation:fall linear infinite;
+    pointer-events:none;
 }
 
-@keyframes caer{
-  from{ transform:translateY(-100px);}
-  to{ transform:translateY(110vh);}
+@keyframes fall{
+    from{
+        transform:translateY(-10vh);
+    }
+    to{
+        transform:translateY(110vh);
+    }
 }
-
 </style>
 </head>
 
@@ -54,39 +57,50 @@ model-viewer{
 
 <h1>Feliz San Valentín mi pequeña Britt ❤️</h1>
 
+<!-- PERSONAJE -->
 <model-viewer
-src="avatar.glb"
-
-animation-name="*"
-autoplay
-
-camera-controls
-auto-rotate
-rotation-per-second="8deg"
-
-camera-orbit="180deg 75deg 3m"
-field-of-view="35deg"
-
-shadow-intensity="1"
-exposure="1">
-
+    src="avatar.glb"
+    autoplay
+    animation-name="*"
+    camera-controls
+    disable-auto-rotate
+    interaction-prompt="none"
+    camera-orbit="0deg 75deg 2.8m"
+    min-camera-orbit="auto auto 2.8m"
+    max-camera-orbit="auto auto 2.8m"
+    field-of-view="35deg"
+    exposure="1"
+    shadow-intensity="1"
+>
 </model-viewer>
 
 <script>
 
-const emojis=["❤️","🌸"];
+/* =============================
+   FLORES Y CORAZONES
+============================= */
 
-for(let i=0;i<50;i++){
-  let e=document.createElement("div");
-  e.className="fall";
-  e.innerText=emojis[Math.floor(Math.random()*2)];
+function crearDecoracion(){
 
-  e.style.left=Math.random()*100+"vw";
-  e.style.animationDuration=(5+Math.random()*6)+"s";
-  e.style.fontSize=(20+Math.random()*20)+"px";
+    const iconos = ["🌸","❤️"];
 
-  document.body.appendChild(e);
+    const d = document.createElement("div");
+    d.className="decor";
+
+    d.innerText = iconos[Math.floor(Math.random()*iconos.length)];
+    d.style.left = Math.random()*100 + "vw";
+
+    const duracion = 6 + Math.random()*6;
+    d.style.animationDuration = duracion + "s";
+
+    d.style.fontSize = (20 + Math.random()*25) + "px";
+
+    document.body.appendChild(d);
+
+    setTimeout(()=>d.remove(), duracion*1000);
 }
+
+setInterval(crearDecoracion,300);
 
 </script>
 

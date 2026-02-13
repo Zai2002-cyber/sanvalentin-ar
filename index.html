@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Feliz San Valentín</title>
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -10,42 +12,45 @@
 body{
     margin:0;
     overflow:hidden;
-    background:#e8a8c4;
+    background:#e9a9c4;
     font-family:Arial;
 }
 
+/* TEXTO ARRIBA */
 h1{
     position:absolute;
+    top:20px;
     width:100%;
     text-align:center;
-    top:20px;
     color:white;
-    font-size:65px;
-    text-shadow:0 0 18px #ff4fa0;
+    font-size:70px;
+    text-shadow:0 0 20px #ff66aa;
     z-index:10;
 }
 
-/* PERSONAJE */
+/* MODEL VIEWER */
 model-viewer{
     width:100vw;
     height:100vh;
-    --poster-color: transparent;
 }
 
 /* FLORES Y CORAZONES */
-.item{
+.fall{
     position:absolute;
     top:-50px;
-    font-size:35px;
-    animation:caer linear infinite;
+    font-size:30px;
+    animation:fall linear infinite;
+    pointer-events:none;
 }
 
-@keyframes caer{
+@keyframes fall{
     from{
-        transform:translateY(-80px);
+        transform:translateY(-100px);
+        opacity:1;
     }
     to{
-        transform:translateY(120vh);
+        transform:translateY(110vh);
+        opacity:1;
     }
 }
 </style>
@@ -55,42 +60,39 @@ model-viewer{
 
 <h1>Feliz San Valentín mi pequeña Britt ❤️</h1>
 
+<!-- PERSONAJE -->
 <model-viewer
     src="avatar.glb"
     autoplay
     animation-name=""
     camera-controls
-    disable-auto-rotate
     interaction-prompt="none"
 
-    camera-orbit="0deg 75deg 2.9m"
-    min-camera-orbit="0deg 75deg 2.9m"
-    max-camera-orbit="0deg 75deg 2.9m"
+    camera-orbit="180deg 78deg 4.2m"
+    min-camera-orbit="180deg 78deg 4.2m"
+    max-camera-orbit="180deg 78deg 4.2m"
 
-    field-of-view="28deg">
-
+    field-of-view="35deg">
 </model-viewer>
 
 <script>
 
-/* FLORES Y CORAZONES */
-const emojis = ["❤️","🌸"];
+/* CORAZONES Y FLORES */
+const emojis=["❤️","🌸"];
 
-function crear(){
+for(let i=0;i<40;i++){
+
     const e=document.createElement("div");
-    e.className="item";
-    e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+    e.className="fall";
+    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
 
     e.style.left=Math.random()*100+"vw";
-    e.style.animationDuration=(6+Math.random()*6)+"s";
+    e.style.animationDuration=(6+Math.random()*8)+"s";
     e.style.fontSize=(20+Math.random()*25)+"px";
+    e.style.animationDelay=Math.random()*6+"s";
 
     document.body.appendChild(e);
-
-    setTimeout(()=>e.remove(),12000);
 }
-
-setInterval(crear,400);
 
 </script>
 

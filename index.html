@@ -77,13 +77,23 @@ model-viewer{
     field-of-view="35deg">
 </model-viewer>
 
-<!-- 🎵 AUDIO (LO ÚNICO AGREGADO) -->
-<audio id="musica" autoplay loop>
-    <source src="WhatsApp Ptt 2026-02-14 en 00.57.14.ogg" type="audio/ogg">
-</audio>
+<!-- AUDIO -->
+<audio id="voz" src="voz.mp3"></audio>
 
 <script>
 
+/* ===== AUDIO (más claro) ===== */
+const audio = document.getElementById("voz");
+
+audio.volume = 1.0; // volumen máximo
+
+// En celular necesita interacción del usuario
+document.body.addEventListener("click", () => {
+    audio.play();
+}, { once:true });
+
+
+/* ===== FLORES Y CORAZONES ===== */
 const emojis=["❤️","🌸"];
 
 for(let i=0;i<40;i++){
@@ -99,10 +109,6 @@ for(let i=0;i<40;i++){
 
     document.body.appendChild(e);
 }
-
-/* 🔊 subir volumen (si hablaste bajito) */
-const audio=document.getElementById("musica");
-audio.volume=1.0;
 
 </script>
 

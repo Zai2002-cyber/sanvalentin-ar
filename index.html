@@ -63,6 +63,11 @@ model-viewer{
 
 <h1>Feliz San Valentín mi pequeña Britt ❤️</h1>
 
+<!-- AUDIO -->
+<audio id="voz" loop>
+  <source src="voz.mp3" type="audio/mpeg">
+</audio>
+
 <model-viewer
     src="avatar.glb"
     autoplay
@@ -77,25 +82,11 @@ model-viewer{
     field-of-view="35deg">
 </model-viewer>
 
-<!-- AUDIO -->
-<audio id="voz" src="voz.mp3"></audio>
-
 <script>
 
-/* ===== AUDIO (más claro) ===== */
-const audio = document.getElementById("voz");
-
-audio.volume = 1.0; // volumen máximo
-
-// En celular necesita interacción del usuario
-document.body.addEventListener("click", () => {
-    audio.play();
-}, { once:true });
-
-
-/* ===== FLORES Y CORAZONES ===== */
 const emojis=["❤️","🌸"];
 
+/* FLORES Y CORAZONES */
 for(let i=0;i<40;i++){
 
     const e=document.createElement("div");
@@ -109,6 +100,13 @@ for(let i=0;i<40;i++){
 
     document.body.appendChild(e);
 }
+
+/* AUDIO (se activa al tocar la pantalla) */
+document.body.addEventListener("click", () => {
+    const audio = document.getElementById("voz");
+    audio.volume = 1.0;
+    audio.play();
+}, { once:true });
 
 </script>
 

@@ -6,15 +6,13 @@
 
 <title>Feliz San Valentín</title>
 
-<script type="module"
-src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-</script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
-    background:#e99ac4;
+    background:#e9a9c4;
     font-family:Arial;
 }
 
@@ -34,25 +32,28 @@ h1{
 model-viewer{
     width:100vw;
     height:100vh;
-    background:transparent;
 }
 
 /* FLORES Y CORAZONES */
-.decor{
+.fall{
     position:absolute;
-    top:-50px;
-    font-size:40px;
-    animation:caer linear infinite;
-    user-select:none;
+    top:-120px;
+    font-size:30px;
+    animation:fall linear infinite;
     pointer-events:none;
 }
 
-@keyframes caer{
+@keyframes fall{
     0%{
-        transform:translateY(-10vh);
+        transform:translateY(-150px);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
     }
     100%{
-        transform:translateY(110vh);
+        transform:translateY(120vh);
+        opacity:1;
     }
 }
 </style>
@@ -62,44 +63,47 @@ model-viewer{
 
 <h1>Feliz San Valentín mi pequeña Britt ❤️</h1>
 
-<!-- AUDIO -->
-<audio id="musica" loop>
-  <source src="WhatsApp Ptt 2026-02-14 at 00.57.14.ogg" type="audio/ogg">
-</audio>
-
-<!-- PERSONAJE -->
 <model-viewer
-src="avatar.glb"
-camera-controls
-disable-pan
-auto-rotate
-rotation-per-second="5deg"
-camera-orbit="0deg 75deg 3.4m"
-field-of-view="30deg"
-animation-name="*"
-autoplay>
+    src="avatar.glb"
+    autoplay
+    animation-name=""
+    camera-controls
+    interaction-prompt="none"
+
+    camera-orbit="180deg 78deg 4.2m"
+    min-camera-orbit="180deg 78deg 4.2m"
+    max-camera-orbit="180deg 78deg 4.2m"
+
+    field-of-view="35deg">
 </model-viewer>
 
-<script>
-/* ===== AUDIO (empieza al tocar pantalla) ===== */
-document.addEventListener("click", () => {
-  const audio = document.getElementById("musica");
-  audio.volume = 1.0;
-  audio.play();
-}, { once:true });
+<!-- 🎵 AUDIO (LO ÚNICO AGREGADO) -->
+<audio id="musica" autoplay loop>
+    <source src="WhatsApp Ptt 2026-02-14 en 00.57.14.ogg" type="audio/ogg">
+</audio>
 
-/* ===== FLORES Y CORAZONES ===== */
-const simbolos = ["❤️","🌸"];
+<script>
+
+const emojis=["❤️","🌸"];
+
 for(let i=0;i<40;i++){
-    let d = document.createElement("div");
-    d.className="decor";
-    d.innerHTML = simbolos[Math.floor(Math.random()*simbolos.length)];
-    d.style.left=Math.random()*100+"vw";
-    d.style.animationDuration=(6+Math.random()*8)+"s";
-    d.style.fontSize=(25+Math.random()*30)+"px";
-    d.style.animationDelay=(Math.random()*5)+"s";
-    document.body.appendChild(d);
+
+    const e=document.createElement("div");
+    e.className="fall";
+    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+
+    e.style.left=Math.random()*100+"vw";
+    e.style.animationDuration=(6+Math.random()*8)+"s";
+    e.style.fontSize=(20+Math.random()*25)+"px";
+    e.style.animationDelay=Math.random()*6+"s";
+
+    document.body.appendChild(e);
 }
+
+/* 🔊 subir volumen (si hablaste bajito) */
+const audio=document.getElementById("musica");
+audio.volume=1.0;
+
 </script>
 
 </body>

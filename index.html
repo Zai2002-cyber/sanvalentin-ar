@@ -6,13 +6,15 @@
 
 <title>Feliz San Valentín</title>
 
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script type="module"
+src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
-    background:#e9a9c4;
+    background:#e99ac4;
     font-family:Arial;
 }
 
@@ -32,28 +34,25 @@ h1{
 model-viewer{
     width:100vw;
     height:100vh;
+    background:transparent;
 }
 
 /* FLORES Y CORAZONES */
-.fall{
+.decor{
     position:absolute;
-    top:-120px; /* ← empieza más arriba */
-    font-size:30px;
-    animation:fall linear infinite;
+    top:-50px;
+    font-size:40px;
+    animation:caer linear infinite;
+    user-select:none;
     pointer-events:none;
 }
 
-@keyframes fall{
+@keyframes caer{
     0%{
-        transform:translateY(-150px);
-        opacity:0; /* aparece suave */
-    }
-    10%{
-        opacity:1;
+        transform:translateY(-10vh);
     }
     100%{
-        transform:translateY(120vh);
-        opacity:1;
+        transform:translateY(110vh);
     }
 }
 </style>
@@ -63,38 +62,44 @@ model-viewer{
 
 <h1>Feliz San Valentín mi pequeña Britt ❤️</h1>
 
+<!-- AUDIO -->
+<audio id="musica" loop>
+  <source src="WhatsApp Ptt 2026-02-14 at 00.57.14.ogg" type="audio/ogg">
+</audio>
+
+<!-- PERSONAJE -->
 <model-viewer
-    src="avatar.glb"
-    autoplay
-    animation-name=""
-    camera-controls
-    interaction-prompt="none"
-
-    camera-orbit="180deg 78deg 4.2m"
-    min-camera-orbit="180deg 78deg 4.2m"
-    max-camera-orbit="180deg 78deg 4.2m"
-
-    field-of-view="35deg">
+src="avatar.glb"
+camera-controls
+disable-pan
+auto-rotate
+rotation-per-second="5deg"
+camera-orbit="0deg 75deg 3.4m"
+field-of-view="30deg"
+animation-name="*"
+autoplay>
 </model-viewer>
 
 <script>
+/* ===== AUDIO (empieza al tocar pantalla) ===== */
+document.addEventListener("click", () => {
+  const audio = document.getElementById("musica");
+  audio.volume = 1.0;
+  audio.play();
+}, { once:true });
 
-const emojis=["❤️","🌸"];
-
+/* ===== FLORES Y CORAZONES ===== */
+const simbolos = ["❤️","🌸"];
 for(let i=0;i<40;i++){
-
-    const e=document.createElement("div");
-    e.className="fall";
-    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
-
-    e.style.left=Math.random()*100+"vw";
-    e.style.animationDuration=(6+Math.random()*8)+"s";
-    e.style.fontSize=(20+Math.random()*25)+"px";
-    e.style.animationDelay=Math.random()*6+"s";
-
-    document.body.appendChild(e);
+    let d = document.createElement("div");
+    d.className="decor";
+    d.innerHTML = simbolos[Math.floor(Math.random()*simbolos.length)];
+    d.style.left=Math.random()*100+"vw";
+    d.style.animationDuration=(6+Math.random()*8)+"s";
+    d.style.fontSize=(25+Math.random()*30)+"px";
+    d.style.animationDelay=(Math.random()*5)+"s";
+    document.body.appendChild(d);
 }
-
 </script>
 
 </body>
